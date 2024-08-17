@@ -7,8 +7,6 @@ public sealed class RegisterCommandValidator : AbstractValidator<RegisterCommand
 {
     public RegisterCommandValidator()
     {
-        RuleFor(command => command.Email)
-            .EmailAddress()
-            .WithMessage("Некорректный Email");
+        
     }
 }

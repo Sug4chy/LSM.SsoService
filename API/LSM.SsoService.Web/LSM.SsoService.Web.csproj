@@ -9,11 +9,15 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\LSM.SsoService.Application\LSM.SsoService.Application.Command\LSM.SsoService.Application.Command.csproj" />
+      <ProjectReference Include="..\..\Application\LSM.SsoService.Application.Command\LSM.SsoService.Application.Command.csproj" />
     </ItemGroup>
 
 </Project>

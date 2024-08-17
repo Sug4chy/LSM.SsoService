@@ -6,10 +6,11 @@ namespace LSM.SsoService.Application.Command.Requests.Auth;
 
 [Validator<RegisterCommandValidator>]
 public sealed record RegisterCommand(
-    string UserName,
-    string Email,
+    string Username,
     string Password,
-    string FirstName,
-    string LastName,
-    DateTime BirthDate
+    string Name,
+    string Surname,
+    DateTime BirthDate,
+    string? Email = null,
+    string? Patronymic = null
 ) : ICommand;
