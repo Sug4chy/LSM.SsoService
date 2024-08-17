@@ -1,5 +1,5 @@
 using LSM.SsoService.Application.Command.Interfaces;
-using LSM.SsoService.Application.Command.Validators.Auth;
+using LSM.SsoService.Application.Command.Validation.Auth;
 using LSM.SsoService.Application.Common.Validation.Attributes;
 
 namespace LSM.SsoService.Application.Command.Requests.Auth;
