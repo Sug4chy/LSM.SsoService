@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LSM.SsoService.Application.Validation.Attributes;
+namespace LSM.SsoService.Application.Common.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class ValidatorAttribute<TValidator> : ValidationAttribute

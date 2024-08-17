@@ -1,6 +1,6 @@
 using FluentValidation;
 using LSM.SsoService.Application.Command.Handlers.Auth;
-using LSM.SsoService.Application.Validation;
+using LSM.SsoService.Application.Common.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 

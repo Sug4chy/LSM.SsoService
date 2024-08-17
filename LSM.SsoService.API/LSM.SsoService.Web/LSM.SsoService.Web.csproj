@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\LSM.SsoService.Application\LSM.SsoService.Application\LSM.SsoService.Application.csproj" />
+      <ProjectReference Include="..\..\LSM.SsoService.Application\LSM.SsoService.Application.Command\LSM.SsoService.Application.Command.csproj" />
     </ItemGroup>
 
 </Project>
