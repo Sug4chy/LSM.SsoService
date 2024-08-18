@@ -1,6 +1,7 @@
 using CSharpFunctionalExtensions;
 using LSM.SsoService.Application.Command.Interfaces;
 using LSM.SsoService.Application.Command.Requests.Auth;
+using LSM.SsoService.Application.Common.Result;
 using LSM.SsoService.Domain.Entities;
 using LSM.SsoService.Domain.ValueObjects;
 using LSM.SsoService.Infrastructure.Persistence.Context;
@@ -14,19 +15,21 @@ public sealed class RegisterCommandHandler(
 {
     private const string EmailAlreadyTaken = "Email {0} уже занят.";
 
-    public async Task<Result> HandleAsync(RegisterCommand command, CancellationToken ct = default)
+    public async Task<EmptyResult> HandleAsync(
+        RegisterCommand command,
+        CancellationToken ct = default)
     {
-        Email? email = null;
-        if (command.Email is not null)
-        {
-            var emailParseResult = Email.Parse(command.Email);
-            if (emailParseResult.IsFailure)
-                return emailParseResult.ConvertFailure<Result>();
+        var emailParseResult = Email.Parse(command.Email);
+        if (emailParseResult.IsFailure)
+            return EmptyResult.Failure(
+                Error.Create(ErrorGroup.Validation, emailParseResult.Error)
+            );
 
-            email = emailParseResult.Value;
-            if (await UserWithEmailExists(email, ct))
-                return Result.Failure(string.Format(EmailAlreadyTaken, email));
-        }
+        var email = emailParseResult.Value;
+        if (await UserWithEmailExistsAsync(email, ct))
+            return EmptyResult.Failure(
+                Error.Create(ErrorGroup.AlreadyExists, string.Format(EmailAlreadyTaken, email))
+            );
 
         var user = User.Create(
             username: command.Username,
@@ -34,16 +37,21 @@ public sealed class RegisterCommandHandler(
             name: command.Name,
             surname: command.Surname,
             birthDate: command.BirthDate,
-            patronymic: command.Patronymic ?? Maybe<string>.None, 
-            email: email ?? Maybe<Email>.None
+            patronymic: command.Patronymic ?? Maybe<string>.None,
+            email: email
         );
-        dataContext.Users.Add(user);
-        await dataContext.SaveChangesAsync(ct);
+        await AddUserAsync(user, ct);
 
-        return Result.Success();
+        return EmptyResult.Success();
     }
 
-    private Task<bool> UserWithEmailExists(Email email, CancellationToken ct = default)
+    private Task<bool> UserWithEmailExistsAsync(Email email, CancellationToken ct = default)
         => dataContext.Users
             .AnyAsync(x => x.Email == email, ct);
+
+    private async Task AddUserAsync(User user, CancellationToken ct = default)
+    {
+        dataContext.Users.Add(user);
+        await dataContext.SaveChangesAsync(ct);
+    }
 }

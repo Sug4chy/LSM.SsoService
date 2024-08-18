@@ -3,6 +3,7 @@ using System;
 using LSM.SsoService.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LSM.SsoService.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240818082708_MakeUserEmailRequired")]
+    partial class MakeUserEmailRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +110,7 @@ namespace LSM.SsoService.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("LSM.SsoService.Domain.Entities.User", b =>
                 {
-                    b.OwnsOne("LSM.SsoService.Domain.Entities.User.Email#LSM.SsoService.Domain.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("LSM.SsoService.Domain.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<Guid>("UserId")
                                 .HasColumnType("uuid");
@@ -122,7 +125,7 @@ namespace LSM.SsoService.Infrastructure.Persistence.Migrations
                             b1.HasIndex("Value")
                                 .IsUnique();
 
-                            b1.ToTable("user", (string)null);
+                            b1.ToTable("user");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");

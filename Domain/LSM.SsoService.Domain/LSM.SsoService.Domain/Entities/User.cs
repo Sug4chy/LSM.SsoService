@@ -1,15 +1,14 @@
 using CSharpFunctionalExtensions;
-using LSM.SsoService.Domain.Abstractions;
 using LSM.SsoService.Domain.Enums;
 using LSM.SsoService.Domain.ValueObjects;
 
 namespace LSM.SsoService.Domain.Entities;
 
-public sealed class User : Entity<Guid>, IHasEmail
+public sealed class User : Entity<Guid>
 {
     public required string Username { get; set; }
     public required string Password { get; set; }
-    public Email? Email { get; set; }
+    public required Email Email { get; set; }
     public required string Name { get; set; }
     public required string Surname { get; set; }
     public string? Patronymic { get; set; }
@@ -24,16 +23,14 @@ public sealed class User : Entity<Guid>, IHasEmail
         string name,
         string surname,
         DateTime birthDate,
-        Maybe<string> patronymic,
-        Maybe<Email> email)
+        Email email,
+        Maybe<string> patronymic)
         => new()
         {
             Id = Guid.NewGuid(),
             Username = username,
             Password = password,
-            Email = email.HasValue
-                ? email.Value
-                : null,
+            Email = email,
             Name = name,
             Surname = surname,
             Patronymic = patronymic.HasValue

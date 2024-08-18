@@ -11,6 +11,6 @@ public sealed record RegisterCommand(
     string Name,
     string Surname,
     DateTime BirthDate,
-    string? Email = null,
+    string Email,
     string? Patronymic = null
 ) : ICommand;

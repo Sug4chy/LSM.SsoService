@@ -6,7 +6,7 @@ namespace LSM.SsoService.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public sealed class AuthController : ControllerBase
+public sealed class AuthController : SsoControllerBase
 {
     [HttpPost("register")]
     public async Task<IActionResult> Register(
@@ -17,7 +17,7 @@ public sealed class AuthController : ControllerBase
     {
         var result = await handler.HandleAsync(command, ct);
         return result.IsSuccess 
-            ? Ok(result) 
-            : BadRequest(result);
+            ? CreatedAtAction("Register", null) 
+            : Error(result.Error);
     }
 }
