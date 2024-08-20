@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Domain\LSM.SsoService.Domain\LSM.SsoService.Domain\LSM.SsoService.Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\LSM.SsoService.Infrastructure.Jwt\LSM.SsoService.Infrastructure.Jwt.csproj" />
       <ProjectReference Include="..\..\Infrastructure\LSM.SsoService.Infrastructure.Persistence\LSM.SsoService.Infrastructure.Persistence.csproj" />
     </ItemGroup>
 

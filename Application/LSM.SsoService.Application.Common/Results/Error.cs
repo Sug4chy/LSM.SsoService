@@ -1,4 +1,4 @@
-namespace LSM.SsoService.Application.Common.Result;
+namespace LSM.SsoService.Application.Common.Results;
 
 public readonly struct Error
 {

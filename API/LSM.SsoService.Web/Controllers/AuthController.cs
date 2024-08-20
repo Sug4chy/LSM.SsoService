@@ -16,8 +16,21 @@ public sealed class AuthController : SsoControllerBase
     )
     {
         var result = await handler.HandleAsync(command, ct);
-        return result.IsSuccess 
-            ? CreatedAtAction("Register", null) 
+        return result.IsSuccess
+            ? CreatedAtAction("Register", null)
+            : Error(result.Error);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(
+        [FromBody] LoginCommand command,
+        [FromServices] LoginCommandHandler handler,
+        CancellationToken ct = default
+    )
+    {
+        var result = await handler.HandleAsync(command, ct);
+        return result.IsSuccess
+            ? Ok(result.Value)
             : Error(result.Error);
     }
 }

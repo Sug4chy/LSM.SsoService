@@ -1,5 +1,5 @@
 using CSharpFunctionalExtensions;
-using LSM.SsoService.Application.Common.Result;
+using LSM.SsoService.Application.Common.Results;
 
 namespace LSM.SsoService.Application.Command.Interfaces;
 

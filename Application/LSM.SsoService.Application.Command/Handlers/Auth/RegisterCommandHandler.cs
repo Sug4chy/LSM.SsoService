@@ -1,7 +1,7 @@
 using CSharpFunctionalExtensions;
 using LSM.SsoService.Application.Command.Interfaces;
 using LSM.SsoService.Application.Command.Requests.Auth;
-using LSM.SsoService.Application.Common.Result;
+using LSM.SsoService.Application.Common.Results;
 using LSM.SsoService.Domain.Entities;
 using LSM.SsoService.Domain.ValueObjects;
 using LSM.SsoService.Infrastructure.Persistence.Context;
@@ -32,7 +32,6 @@ public sealed class RegisterCommandHandler(
             );
 
         var user = User.Create(
-            username: command.Username,
             password: command.Password,
             name: command.Name,
             surname: command.Surname,

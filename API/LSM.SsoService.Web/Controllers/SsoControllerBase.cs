@@ -1,5 +1,6 @@
-using LSM.SsoService.Application.Common.Result;
+using LSM.SsoService.Application.Common.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace LSM.SsoService.Web.Controllers;
 
@@ -12,15 +13,15 @@ public abstract class SsoControllerBase : ControllerBase
         {
             ErrorGroup.Validation => StatusCodes.Status400BadRequest,
             ErrorGroup.AlreadyExists => StatusCodes.Status409Conflict,
+            ErrorGroup.NotFound => StatusCodes.Status404NotFound,
             _ => StatusCodes.Status500InternalServerError,
         };
 
         return Problem(
-            type: string.Empty,
             detail: error.Message,
             instance: null,
             statusCode: statusCode,
-            title: error.ErrorGroup.ToString()
+            title: ReasonPhrases.GetReasonPhrase(statusCode)
         );
     }
 }

@@ -18,12 +18,6 @@ public sealed class UserEntityConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasColumnName("id");
 
-        builder.HasIndex(x => x.Username)
-            .IsUnique();
-        builder.Property(x => x.Username)
-            .IsRequired()
-            .HasColumnName("username");
-
         builder.Property(x => x.Password)
             .IsRequired()
             .HasColumnName("password");

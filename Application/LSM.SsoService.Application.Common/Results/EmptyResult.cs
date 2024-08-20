@@ -1,11 +1,12 @@
 using CSharpFunctionalExtensions;
 
-namespace LSM.SsoService.Application.Common.Result;
+namespace LSM.SsoService.Application.Common.Results;
 
 public readonly struct EmptyResult : IResult<bool, Error>
 {
     [Obsolete("У пустого результата не может быть значения")]
     public bool Value => false;
+
     public bool IsFailure { get; }
     public bool IsSuccess { get; }
     public Error Error { get; }

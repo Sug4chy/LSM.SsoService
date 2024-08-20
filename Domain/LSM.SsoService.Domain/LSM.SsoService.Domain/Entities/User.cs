@@ -6,9 +6,8 @@ namespace LSM.SsoService.Domain.Entities;
 
 public sealed class User : Entity<Guid>
 {
-    public required string Username { get; set; }
-    public required string Password { get; set; }
     public required Email Email { get; set; }
+    public required string Password { get; set; }
     public required string Name { get; set; }
     public required string Surname { get; set; }
     public string? Patronymic { get; set; }
@@ -18,7 +17,6 @@ public sealed class User : Entity<Guid>
     public ICollection<Session>? Sessions { get; set; }
 
     public static User Create(
-        string username,
         string password,
         string name,
         string surname,
@@ -28,7 +26,6 @@ public sealed class User : Entity<Guid>
         => new()
         {
             Id = Guid.NewGuid(),
-            Username = username,
             Password = password,
             Email = email,
             Name = name,
