@@ -21,13 +21,12 @@ public sealed class LoginCommandHandler(
 
     public async Task<Result<JwtResponse, Error>> HandleAsync(LoginCommand command, CancellationToken ct = default)
     {
-        var emailParseResult = Email.Parse(command.Email);
-        if (emailParseResult.IsFailure)
+        var (_, isFailure, email) = Email.Parse(command.Email);
+        if (isFailure)
             return Result.Failure<JwtResponse, Error>(
                 Error.Create(ErrorGroup.Validation, ValidationMessages.InvalidEmail)
             );
 
-        var email = emailParseResult.Value;
         var maybeUser = await GetUserByEmailAndPasswordAsync(email, command.Password, ct);
         if (maybeUser.HasNoValue)
             return Result.Failure<JwtResponse, Error>(

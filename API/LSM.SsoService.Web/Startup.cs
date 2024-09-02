@@ -1,6 +1,7 @@
 using LSM.SsoService.Application.Command.Extensions;
 using LSM.SsoService.Infrastructure.Jwt.Configuration;
 using LSM.SsoService.Infrastructure.Jwt.Extensions;
+using LSM.SsoService.Infrastructure.Messaging.Extensions;
 using LSM.SsoService.Infrastructure.Persistence.Extensions;
 using LSM.SsoService.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,7 +37,10 @@ public sealed class Startup(IConfiguration configuration)
         services.AddRequestValidation();
         services.AddPersistence(configuration.GetConnectionString("DefaultConnection"));
 
+        services.AddCommandServices();
         services.AddCommandHandlers();
+
+        services.AddMessaging();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

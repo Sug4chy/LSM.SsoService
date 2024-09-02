@@ -2,8 +2,8 @@ namespace LSM.SsoService.Application.Common.Results;
 
 public readonly struct Error
 {
-    public ErrorGroup ErrorGroup { get; init; }
-    public string Message { get; init; }
+    public ErrorGroup ErrorGroup { get; }
+    public string Message { get; }
 
     private Error(ErrorGroup errorGroup, string message)
     {

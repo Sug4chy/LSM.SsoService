@@ -16,6 +16,7 @@ public sealed class AuthController : SsoControllerBase
     )
     {
         var result = await handler.HandleAsync(command, ct);
+
         return result.IsSuccess
             ? CreatedAtAction("Register", null)
             : Error(result.Error);
@@ -29,8 +30,23 @@ public sealed class AuthController : SsoControllerBase
     )
     {
         var result = await handler.HandleAsync(command, ct);
+
         return result.IsSuccess
             ? Ok(result.Value)
+            : Error(result.Error);
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> RequestResetPassword(
+        [FromBody] RequestResetPasswordCommand command,
+        [FromServices] RequestResetPasswordCommandHandler handler,
+        CancellationToken ct = default
+    )
+    {
+        var result = await handler.HandleAsync(command, ct);
+
+        return result.IsSuccess
+            ? Accepted()
             : Error(result.Error);
     }
 }

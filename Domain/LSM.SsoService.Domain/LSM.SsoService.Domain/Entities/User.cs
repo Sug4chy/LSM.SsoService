@@ -13,6 +13,10 @@ public sealed class User : Entity<Guid>
     public string? Patronymic { get; set; }
     public Role Role { get; set; }
     public DateTime BirthDate { get; set; }
+    
+    // Reset password
+    public string? CurrentResetPasswordToken { get; set; }
+    public DateTime? CurrentResetPasswordTokenExpiryDate { get; set; }
 
     public ICollection<Session>? Sessions { get; set; }
 

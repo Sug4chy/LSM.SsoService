@@ -14,3 +14,6 @@ await Host.CreateDefaultBuilder(args)
     .UseEnvironment(environment ?? Environments.Development)
     .Build()
     .RunAsync();
+
+// TODO миграция и поменять конфиг сущности User
+// TODO добавить конфигурацию для TokenSource

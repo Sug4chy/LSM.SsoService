@@ -19,13 +19,12 @@ public sealed class RegisterCommandHandler(
         RegisterCommand command,
         CancellationToken ct = default)
     {
-        var emailParseResult = Email.Parse(command.Email);
-        if (emailParseResult.IsFailure)
+        var (_, isFailure, email, error) = Email.Parse(command.Email);
+        if (isFailure)
             return EmptyResult.Failure(
-                Error.Create(ErrorGroup.Validation, emailParseResult.Error)
+                Error.Create(ErrorGroup.Validation, error)
             );
 
-        var email = emailParseResult.Value;
         if (await UserWithEmailExistsAsync(email, ct))
             return EmptyResult.Failure(
                 Error.Create(ErrorGroup.AlreadyExists, string.Format(EmailAlreadyTaken, email))

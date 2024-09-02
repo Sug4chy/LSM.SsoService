@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSM.SsoService.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSM.SsoService.Infrastructure.Jwt", "Infrastructure\LSM.SsoService.Infrastructure.Jwt\LSM.SsoService.Infrastructure.Jwt.csproj", "{BCF7640F-ECF5-4D0E-A955-2B0F350A078A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSM.SsoService.Infrastructure.Messaging", "Infrastructure\LSM.SsoService.Infrastructure.Messaging\LSM.SsoService.Infrastructure.Messaging.csproj", "{213AB454-AC21-4002-83FE-344DAFE90C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{BCF7640F-ECF5-4D0E-A955-2B0F350A078A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCF7640F-ECF5-4D0E-A955-2B0F350A078A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCF7640F-ECF5-4D0E-A955-2B0F350A078A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213AB454-AC21-4002-83FE-344DAFE90C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213AB454-AC21-4002-83FE-344DAFE90C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213AB454-AC21-4002-83FE-344DAFE90C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213AB454-AC21-4002-83FE-344DAFE90C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{490B4F41-E259-4F87-A964-F35AE5E89982} = {074CFBFC-B610-4CEC-ACB1-F5785EC38460}
@@ -58,5 +64,6 @@ Global
 		{3794EC08-44AA-4A50-A6E3-939E743D1253} = {41A58973-CBAE-4717-9072-BDE065D5BA63}
 		{CB4D1679-5571-4186-8F26-DDF4BE6156E4} = {97C9C4DE-1122-45C1-A65C-B83058A241E3}
 		{BCF7640F-ECF5-4D0E-A955-2B0F350A078A} = {97C9C4DE-1122-45C1-A65C-B83058A241E3}
+		{213AB454-AC21-4002-83FE-344DAFE90C4A} = {97C9C4DE-1122-45C1-A65C-B83058A241E3}
 	EndGlobalSection
 EndGlobal
