@@ -1,7 +1,7 @@
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LSM.SsoService.Infrastructure.Jwt.Configuration;
+namespace LSM.SsoService.Infrastructure.Tokens.Jwt.Configuration;
 
 public sealed record JwtConfiguration
 {
@@ -11,7 +11,7 @@ public sealed record JwtConfiguration
     public required string Audience { get; init; }
     public required string Key { get; init; }
     public required int ExpireMinutes { get; init; }
-    public TimeSpan ExpirationTime => TimeSpan.FromMinutes(ExpireMinutes);
+    public TimeSpan ExpirationPeriod => TimeSpan.FromMinutes(ExpireMinutes);
     
     public TokenValidationParameters ToTokenValidationParameters()
         => new()

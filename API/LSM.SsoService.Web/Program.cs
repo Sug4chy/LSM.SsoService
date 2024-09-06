@@ -6,7 +6,7 @@ await Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(hostBuilder =>
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile($"appsettings.{environment}.json")
+            .AddJsonFile("appsettings.json")
             .Build();
         hostBuilder.UseConfiguration(configuration);
         hostBuilder.UseStartup<Startup>();
@@ -15,5 +15,4 @@ await Host.CreateDefaultBuilder(args)
     .Build()
     .RunAsync();
 
-// TODO миграция и поменять конфиг сущности User
 // TODO добавить конфигурацию для TokenSource

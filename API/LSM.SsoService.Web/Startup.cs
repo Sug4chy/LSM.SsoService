@@ -1,8 +1,9 @@
 using LSM.SsoService.Application.Command.Extensions;
-using LSM.SsoService.Infrastructure.Jwt.Configuration;
-using LSM.SsoService.Infrastructure.Jwt.Extensions;
 using LSM.SsoService.Infrastructure.Messaging.Extensions;
 using LSM.SsoService.Infrastructure.Persistence.Extensions;
+using LSM.SsoService.Infrastructure.Tokens.Configuration;
+using LSM.SsoService.Infrastructure.Tokens.Extensions;
+using LSM.SsoService.Infrastructure.Tokens.Jwt.Configuration;
 using LSM.SsoService.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -22,8 +23,9 @@ public sealed class Startup(IConfiguration configuration)
             options.LowercaseQueryStrings = true;
         });
 
-        services.Configure<JwtConfiguration>(configuration.GetSection(JwtConfiguration.Location));
-        
+        services.AddSettings<JwtConfiguration>(configuration.GetSection(JwtConfiguration.Location));
+        services.AddSettings<TokenSourceConfiguration>(configuration.GetSection(TokenSourceConfiguration.Location));
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -32,12 +34,11 @@ public sealed class Startup(IConfiguration configuration)
                     .Get<JwtConfiguration>();
                 options.TokenValidationParameters = jwtConfig!.ToTokenValidationParameters();
             })
-            .WithJwtServices();
+            .WithJwtGenerator()
+            .WithTokenSources();
 
         services.AddRequestValidation();
         services.AddPersistence(configuration.GetConnectionString("DefaultConnection"));
-
-        services.AddCommandServices();
         services.AddCommandHandlers();
 
         services.AddMessaging();

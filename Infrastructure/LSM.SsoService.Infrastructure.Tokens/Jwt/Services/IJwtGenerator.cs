@@ -1,6 +1,6 @@
 using LSM.SsoService.Domain.Entities;
 
-namespace LSM.SsoService.Infrastructure.Jwt.Services;
+namespace LSM.SsoService.Infrastructure.Tokens.Jwt.Services;
 
 public interface IJwtGenerator
 {

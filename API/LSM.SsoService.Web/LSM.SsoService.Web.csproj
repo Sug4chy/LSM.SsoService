@@ -19,7 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Application\LSM.SsoService.Application.Command\LSM.SsoService.Application.Command.csproj" />
-      <ProjectReference Include="..\..\Infrastructure\LSM.SsoService.Infrastructure.Jwt\LSM.SsoService.Infrastructure.Jwt.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\LSM.SsoService.Infrastructure.Tokens\LSM.SsoService.Infrastructure.Tokens.csproj" />
     </ItemGroup>
 
 </Project>

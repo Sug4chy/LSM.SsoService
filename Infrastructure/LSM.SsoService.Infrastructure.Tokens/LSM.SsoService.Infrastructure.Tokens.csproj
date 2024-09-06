@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>LSM.SsoService.Infrastructure.Tokens</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +14,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Domain\LSM.SsoService.Domain\LSM.SsoService.Domain\LSM.SsoService.Domain.csproj" />
+      <ProjectReference Include="..\LSM.SsoService.Infrastructure.Persistence\LSM.SsoService.Infrastructure.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Jwt\" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using LSM.SsoService.Domain.Entities;
+using LSM.SsoService.Infrastructure.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,26 +9,26 @@ public sealed class SessionEntityConfiguration : IEntityTypeConfiguration<Sessio
 {
     public void Configure(EntityTypeBuilder<Session> builder)
     {
-        builder.ToTable("session");
+        builder.ToTable(nameof(Session).ToSnakeCase());
         
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd()
             .IsRequired()
-            .HasColumnName("id");
+            .HasColumnName(nameof(Session.Id).ToSnakeCase());
         
         builder.Property(x => x.StartDate)
             .IsRequired()
-            .HasColumnName("start_date");
+            .HasColumnName(nameof(Session.StartDate).ToSnakeCase());
         
         builder.Property(x => x.EndDate)
-            .HasColumnName("end_date");
+            .HasColumnName(nameof(Session.EndDate).ToSnakeCase());
 
         builder.HasOne(x => x.User)
             .WithMany(x => x.Sessions)
             .HasForeignKey(x => x.UserId);
         builder.Property(x => x.UserId)
             .HasDefaultValue(null)
-            .HasColumnName("user_id");
+            .HasColumnName(nameof(Session.UserId).ToSnakeCase());
     }
 }

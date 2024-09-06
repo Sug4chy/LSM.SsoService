@@ -1,19 +1,20 @@
 using CSharpFunctionalExtensions;
 using LSM.SsoService.Application.Command.Interfaces;
 using LSM.SsoService.Application.Command.Requests.Auth;
-using LSM.SsoService.Application.Command.Services;
 using LSM.SsoService.Application.Common.Results;
 using LSM.SsoService.Domain.Entities;
 using LSM.SsoService.Domain.ValueObjects;
+using LSM.SsoService.Domain.ValueObjects.Tokens;
 using LSM.SsoService.Infrastructure.Messaging.Services;
 using LSM.SsoService.Infrastructure.Persistence.Context;
 using LSM.SsoService.Infrastructure.Persistence.Extensions;
+using LSM.SsoService.Infrastructure.Tokens.Services;
 
 namespace LSM.SsoService.Application.Command.Handlers.Auth;
 
 public sealed class RequestResetPasswordCommandHandler(
     IDataContext dataContext,
-    ITokenSource tokenSource,
+    ITokenSource<ResetPasswordToken> tokenSource,
     IMessagingService messaging
 ) : ICommandHandler<RequestResetPasswordCommand>
 {
@@ -32,11 +33,10 @@ public sealed class RequestResetPasswordCommandHandler(
             );
 
         var user = maybeUser.Value;
-        string token = tokenSource.ResetPasswordTokenFor(user);
-
+        var token = tokenSource.ResetPasswordTokenFor(user);
         await dataContext.SaveChangesAsync(ct);
-        
-        await messaging.SendResetPasswordEmailAsync(email, token, ct);
+
+        await messaging.SendResetPasswordEmailAsync(email, token.Token, ct);
 
         return EmptyResult.Success();
     }

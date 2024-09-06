@@ -1,4 +1,4 @@
-namespace LSM.SsoService.Application.Command.Configuration;
+namespace LSM.SsoService.Infrastructure.Tokens.Configuration;
 
 public sealed record TokenSourceConfiguration
 {

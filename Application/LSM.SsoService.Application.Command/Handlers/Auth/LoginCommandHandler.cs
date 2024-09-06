@@ -6,9 +6,9 @@ using LSM.SsoService.Application.Command.Validation;
 using LSM.SsoService.Application.Common.Results;
 using LSM.SsoService.Domain.Entities;
 using LSM.SsoService.Domain.ValueObjects;
-using LSM.SsoService.Infrastructure.Jwt.Services;
 using LSM.SsoService.Infrastructure.Persistence.Context;
 using LSM.SsoService.Infrastructure.Persistence.Extensions;
+using LSM.SsoService.Infrastructure.Tokens.Jwt.Services;
 
 namespace LSM.SsoService.Application.Command.Handlers.Auth;
 
